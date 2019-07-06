@@ -1,0 +1,36 @@
+html,
+body {
+    width: 100%;
+}
+
+[vue-data],
+[help-name],
+[alert-action] {
+    display: none;
+}
+
+th,
+td {
+    vertical-align: middle !important;
+    text-align: center;
+}
+
+.highcharts-container {
+    width: 100% !important;
+    text-align: center !important;
+}
+
+.daterangepicker select {
+    font-size: 14px !important;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #c2cad8;
+    border-radius: 4px;
+}
+
+#select-display .btn-group {
+    width: 100%;
+}
+#select-display .btn {
+    width: 50%;
+}
