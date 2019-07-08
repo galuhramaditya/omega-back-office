@@ -17,11 +17,6 @@ $router->group(["name" => "view"], function () use ($router) {
     $router->get('/login', 'ViewController@login');
 });
 
-// // outlet
-// $router->group(["prefix" => "outlet"], function () use ($router) {
-//     $router->get("/get", "OutletController@get");
-// });
-
 // company
 $router->group(["prefix" => "company"], function () use ($router) {
     $router->get("/get", "CompanyController@get");
@@ -55,36 +50,6 @@ $router->group(["prefix" => "company"], function () use ($router) {
 
 // report
 $router->group(["prefix" => "report"], function () use ($router) {
-    // $router->group(["prefix" => "day-of-week-guest-analysis"], function () use ($router) {
-    //     $router->get('/', 'ViewController@dayOfWeekGuestAnalysis');
-    //     $router->post('/', 'ReportController@dayOfWeekGuestAnalysis');
-    // });
-
-    // $router->group(["prefix" => "weekly-guest-analysis"], function () use ($router) {
-    //     $router->get('/', 'ViewController@weeklyGuestAnalysis');
-    //     $router->post('/', 'ReportController@weeklyGuestAnalysis');
-    // });
-
-    // $router->group(["prefix" => "monthly-guest-analysis"], function () use ($router) {
-    //     $router->get('/', 'ViewController@monthlyGuestAnalysis');
-    //     $router->post('/', 'ReportController@monthlyGuestAnalysis');
-    // });
-
-    // $router->group(["prefix" => "yearly-guest-analysis"], function () use ($router) {
-    //     $router->get('/', 'ViewController@yearlyGuestAnalysis');
-    //     $router->post('/', 'ReportController@yearlyGuestAnalysis');
-    // });
-
-    // $router->group(["prefix" => "player-in-house"], function () use ($router) {
-    //     $router->get('/', 'ViewController@playerInHouse');
-    //     $router->post('/', 'ReportController@playerInHouse');
-    // });
-
-    // $router->group(["prefix" => "player-in-house"], function () use ($router) {
-    //     $router->get('/', 'ViewController@playerInHouse');
-    //     $router->post('/', 'ReportController@playerInHouse');
-    // });
-
     $router->group(["prefix" => "balance-sheet"], function () use ($router) {
         $router->get('/', 'ViewController@balanceSheet');
         $router->post('/', 'ReportController@balanceSheet');

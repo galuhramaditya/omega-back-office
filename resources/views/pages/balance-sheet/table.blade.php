@@ -14,8 +14,10 @@
                         <tr v-for="(data, index) in report.reports">
                             <td style="text-align: left;" :class="data.ActNm[0] != ' ' ? 'bold' : ''">@{{data.ActNm.split(" ").join("&nbsp")}}</td>
                             <td style="text-align: right;">@{{data.ActAmt == 0 ? "" : parseFloat(data.ActAmt).toLocaleString()}}</td>
+                            <td style="text-align: right;" :style="data.ActTot == 0 ? '' : 'border-top: 2px solid black'">@{{data.ActTot == 0 ? "" : parseFloat(data.ActTot).toLocaleString()}}</td>
                             <td style="text-align: left;" :class="data.PasNm[0] != ' ' ? 'bold' : ''">@{{data.PasNm.split(" ").join("&nbsp")}}</td>
                             <td style="text-align: right;">@{{data.PasAmt == 0 ? "" : parseFloat(data.PasAmt).toLocaleString()}}</td>
+                            <td style="text-align: right;" :style="data.PasTot == 0 ? '' : 'border-top: 2px solid black'">@{{data.PasTot == 0 ? "" : parseFloat(data.PasTot).toLocaleString()}}</td>
                         </tr>
                     </tbody>
                 </table>
