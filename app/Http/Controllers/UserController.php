@@ -18,27 +18,29 @@ class UserController extends Controller
         $this->userService = $userService;
         $this->validation = Validation::rulesOfFunction([
             "login" => [
-                "cocd" => "required",
-                "usercd" => "required",
-                "password" => "required",
+                "cocd"      => "required",
+                "username"  => "required",
+                "password"  => "required",
             ],
-            // "changeSelfPassword" => [
-            //     'new_password'    => 'required',
-            //     'new_password_confirmation'    => 'required|same:new_password',
-            // ],
-            // "create" => [
-            //     'username'      => 'required|unique:users',
-            //     'password'      => 'required',
-            //     'password_confirmation' => 'required|same:password',
-            //     'role'    => 'required'
-            // ],
-            // "edit" => [
-            //     'id'  => 'required',
-            //     'role' => "required"
-            // ],
-            // "delete" => [
-            //     'id'  => 'required'
-            // ]
+            "changeSelfPassword" => [
+                'new_password'              => 'required',
+                'new_password_confirmation' => 'required|same:new_password',
+            ],
+            "create" => [
+                'cocd'          => 'required',
+                'username'      => 'required|unique:users',
+                'password'      => 'required',
+                'password_confirmation' => 'required|same:password',
+                'role'          => 'required'
+            ],
+            "edit" => [
+                'cocd'  => 'required',
+                'id'    => 'required',
+                'role'  => "required"
+            ],
+            "delete" => [
+                'id'    => 'required'
+            ]
         ]);
     }
 
@@ -63,63 +65,63 @@ class UserController extends Controller
         return Response::success("succesfully get current user data", $request->token);
     }
 
-    // public function get(Request $request)
-    // {
-    //     $get = $this->userService->get($request->token->role->level);
-    //     return Response::success("successfully get users data", $get);
-    // }
+    public function get(Request $request)
+    {
+        $get = $this->userService->get($request->token->role->level);
+        return Response::success("successfully get users data", $get);
+    }
 
-    // public function selfEdit(Request $request)
-    // {
-    //     Validation::rules(['username'  => 'required|unique:users,username,' . $request->token->id])->validate($request);
+    public function selfEdit(Request $request)
+    {
+        Validation::rules(['username'  => 'required|unique:users,username,' . $request->token->id])->validate($request);
 
-    //     $editSelf = $this->userService->update($request->except("token"), $request->token->id);
-    //     if ($editSelf) {
-    //         return Response::success('successfully editing self data', $editSelf);
-    //     }
-    // }
+        $editSelf = $this->userService->update($request->except("token"), $request->token->id);
+        if ($editSelf) {
+            return Response::success('successfully editing self data', $editSelf);
+        }
+    }
 
-    // public function changeSelfPassword(Request $request)
-    // {
-    //     $this->validation->validate($request);
+    public function changeSelfPassword(Request $request)
+    {
+        $this->validation->validate($request);
 
-    //     $changeSelfPassword = $this->userService->update(["password" => $request->new_password], $request->token->id);
+        $changeSelfPassword = $this->userService->update(["password" => $request->new_password], $request->token->id);
 
-    //     if ($changeSelfPassword) {
-    //         return Response::success('successfully changing self password', $changeSelfPassword);
-    //     }
-    // }
+        if ($changeSelfPassword) {
+            return Response::success('successfully changing self password', $changeSelfPassword);
+        }
+    }
 
-    // public function create(Request $request)
-    // {
-    //     $this->validation->validate($request);
+    public function create(Request $request)
+    {
+        $this->validation->validate($request);
 
-    //     $create = $this->userService->create($request->all());
+        $create = $this->userService->create($request->all());
 
-    //     if ($create) {
-    //         return Response::success('successfully creating new user', $create);
-    //     }
-    // }
+        if ($create) {
+            return Response::success('successfully creating new user', $create);
+        }
+    }
 
-    // public function edit(Request $request)
-    // {
-    //     $this->validation->validate($request);
+    public function edit(Request $request)
+    {
+        $this->validation->validate($request);
 
-    //     $edit = $this->userService->update($request->except("token"), $request->id);
+        $edit = $this->userService->update($request->except("token"), $request->id);
 
-    //     if ($edit) {
-    //         return Response::success('successfully editing user data', $edit);
-    //     }
-    // }
+        if ($edit) {
+            return Response::success('successfully editing user data', $edit);
+        }
+    }
 
-    // public function delete(Request $request)
-    // {
-    //     $this->validation->validate($request);
+    public function delete(Request $request)
+    {
+        $this->validation->validate($request);
 
-    //     $delete = $this->userService->delete($request->id);
+        $delete = $this->userService->delete($request->id);
 
-    //     if ($delete) {
-    //         return Response::success('successfully deleting user', $delete);
-    //     }
-    // }
+        if ($delete) {
+            return Response::success('successfully deleting user', $delete);
+        }
+    }
 }

@@ -7,19 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected $table = "samuser";
-    // protected $fillable = [
-    //     "username", "password", "role_id"
-    // ];
+    protected $table = "users";
+    protected $fillable = [
+        "cocd", "username", "password", "role_id"
+    ];
     protected $hidden = [
-        "Password"
+        "password", "role_id"
     ];
 
     public $incrementing = false;
     public $timestamps = false;
 
-    // public function role()
-    // {
-    //     return $this->belongsTo(Role::class);
-    // }
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

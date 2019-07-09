@@ -16,7 +16,7 @@ var app = new Vue({
         handleLogin: function() {
             var form = $("[form-action=login]");
             var cocd = form.find("select[name=cocd]").val();
-            var usercd = form.find("input[name=usercd]").val();
+            var username = form.find("input[name=username]").val();
             var password = form.find("input[name=password]").val();
 
             hideFormAlert();
@@ -26,7 +26,7 @@ var app = new Vue({
                 url: "/user/login",
                 data: {
                     cocd: cocd,
-                    usercd: usercd,
+                    username: username,
                     password: password
                 },
                 success: function(response) {

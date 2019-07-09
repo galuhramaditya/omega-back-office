@@ -6,7 +6,7 @@
                     <i class="fa fa-user font-green"></i>
                     <span class="caption-subject font-green bold uppercase">User Info</span>
                 </div>
-                {{-- <div class="actions">
+                <div class="actions">
                     <div class="btn-group">
                         <a class="btn yellow btn-outline btn-circle btn-sm" data-toggle="modal" href="#self-edit">Edit</a>
                         @include("pages.dashboard.self-edit")
@@ -15,7 +15,7 @@
                         <a class="btn purple btn-outline btn-circle btn-sm" data-toggle="modal" href="#change-self-password">Change Password</a>
                         @include("pages.dashboard.change-self-password")
                     </div>
-                </div> --}}
+                </div>
             </div>
             <div class="portlet-body" v-if="user != null">
                 <div class="row">
@@ -24,25 +24,34 @@
                     </div>
                     <div class="col-xs-1" style="width: 1%"> : </div>
                     <div class="col-xs-6 bold">
-                        @{{user.CoCd}}
+                        @{{user.cocd}}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-5 text-right">
-                        Usercd
+                        Username
                     </div>
                     <div class="col-xs-1" style="width: 1%"> : </div>
                     <div class="col-xs-6 bold">
-                        @{{user.UserCd}}
+                        @{{user.username}}
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" v-if="user.role != null">
                     <div class="col-xs-5 text-right">
-                        Name
+                        Role
                     </div>
                     <div class="col-xs-1" style="width: 1%"> : </div>
                     <div class="col-xs-6 bold">
-                        @{{user.Name}}
+                        @{{user.role.name}}
+                    </div>
+                </div>
+                <div class="row" v-if="user.role != null">
+                    <div class="col-xs-5 text-right">
+                        Level
+                    </div>
+                    <div class="col-xs-1" style="width: 1%"> : </div>
+                    <div class="col-xs-6 bold">
+                        @{{user.role.level}}
                     </div>
                 </div>
             </div>

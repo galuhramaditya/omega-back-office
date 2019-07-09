@@ -1,5 +1,19 @@
 var account = new Vue({
+    data: {
+        cocd: null,
+        users: null,
+        roles: null
+    },
     methods: {
+        refresh_cocd: function() {
+            $.ajax({
+                type: "get",
+                url: "/company/get",
+                success: function(response) {
+                    account.cocd = response.data;
+                }
+            });
+        },
         refresh_users: function() {
             $.ajax({
                 type: "get",
@@ -8,7 +22,7 @@ var account = new Vue({
                     token: app.token
                 },
                 success: function(response) {
-                    app.container = response.data;
+                    account.users = response.data;
                     account.refresh_roles();
                 }
             });
@@ -21,12 +35,13 @@ var account = new Vue({
                     token: app.token
                 },
                 success: function(response) {
-                    app.extra_container = response.data;
+                    account.roles = response.data;
                 }
             });
         },
         handle_create: function() {
             var form = $("[form-action=create]");
+            var cocd = form.find("select[name=cocd]").val();
             var username = form.find("input[name=username]").val();
             var password = form.find("input[name=password]").val();
             var password_confirmation = form
@@ -41,6 +56,7 @@ var account = new Vue({
                 url: "/user/create",
                 data: {
                     token: app.token,
+                    cocd: cocd,
                     username: username,
                     password: password,
                     password_confirmation: password_confirmation,
@@ -64,6 +80,7 @@ var account = new Vue({
             ) {
                 if (result) {
                     var form = $(`[form-action=edit-${id}]`);
+                    var cocd = form.find("select[name=cocd]").val();
                     var role = form.find("select[name=role]").val();
 
                     hideFormAlert();
@@ -73,6 +90,7 @@ var account = new Vue({
                         url: "/user/edit",
                         data: {
                             token: app.token,
+                            cocd: cocd,
                             role: role,
                             id: id
                         },
@@ -126,5 +144,6 @@ var account = new Vue({
 });
 
 $(document).ready(function() {
+    account.refresh_cocd();
     account.refresh_users();
 });

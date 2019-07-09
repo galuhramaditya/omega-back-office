@@ -21,18 +21,18 @@ class ViewController extends Controller
         return View::make('pages.balance-sheet.index');
     }
 
-    // public function accounts()
-    // {
-    //     return View::make('pages.accounts.index');
-    // }
+    public function accounts()
+    {
+        return View::make('pages.accounts.index');
+    }
 
-    // public function roles()
-    // {
-    //     return View::make('pages.roles.index');
-    // }
+    public function roles()
+    {
+        return View::make('pages.roles.index');
+    }
 
-    // public function pages()
-    // {
-    //     return View::make('pages.pages.index');
-    // }
+    public function pages()
+    {
+        return View::make('pages.pages.index');
+    }
 }

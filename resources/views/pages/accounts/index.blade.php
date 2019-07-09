@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- BEGIN CONTENT BODY -->
-<div id="user">
+<div id="account">
     <!-- BEGIN PAGE TITLE-->
     <h1 class="page-title"> Accounts System
     </h1>

@@ -22,31 +22,31 @@ $router->group(["prefix" => "company"], function () use ($router) {
     $router->get("/get", "CompanyController@get");
 });
 
-// // role
-// $router->group(["prefix" => "role"], function () use ($router) {
-//     $router->get("/", "ViewController@roles");
-//     $router->group(["middleware" => "authToken"], function () use ($router) {
-//         $router->get("/get", "RoleController@get");
-//         $router->post("/create", "RoleController@create");
-//         $router->patch("/edit", "RoleController@edit");
-//         $router->group(["middleware" => "authPassword"], function () use ($router) {
-//             $router->delete("/delete", "RoleController@delete");
-//         });
-//     });
-// });
+// role
+$router->group(["prefix" => "role"], function () use ($router) {
+    $router->get("/", "ViewController@roles");
+    $router->group(["middleware" => "authToken"], function () use ($router) {
+        $router->get("/get", "RoleController@get");
+        $router->post("/create", "RoleController@create");
+        $router->patch("/edit", "RoleController@edit");
+        $router->group(["middleware" => "authPassword"], function () use ($router) {
+            $router->delete("/delete", "RoleController@delete");
+        });
+    });
+});
 
-// // page
-// $router->group(["prefix" => "page"], function () use ($router) {
-//     $router->get("/", "ViewController@pages");
-//     $router->group(["middleware" => "authToken"], function () use ($router) {
-//         $router->get("/get", "PageController@get");
-//         $router->post("/create", "PageController@create");
-//         $router->patch("/edit", "PageController@edit");
-//         $router->group(["middleware" => "authPassword"], function () use ($router) {
-//             $router->delete("/delete", "PageController@delete");
-//         });
-//     });
-// });
+// page
+$router->group(["prefix" => "page"], function () use ($router) {
+    $router->get("/", "ViewController@pages");
+    $router->group(["middleware" => "authToken"], function () use ($router) {
+        $router->get("/get", "PageController@get");
+        $router->post("/create", "PageController@create");
+        $router->patch("/edit", "PageController@edit");
+        $router->group(["middleware" => "authPassword"], function () use ($router) {
+            $router->delete("/delete", "PageController@delete");
+        });
+    });
+});
 
 // report
 $router->group(["prefix" => "report"], function () use ($router) {
@@ -61,26 +61,26 @@ $router->group(["prefix" => "user"], function () use ($router) {
     $router->post('/login', 'UserController@login');
 
     $router->group(["prefix" => "accounts"], function () use ($router) {
-        // $router->get('/', 'ViewController@accounts');
-        // $router->group(["middleware" => "authToken"], function () use ($router) {
-        //     $router->get('/get', 'UserController@get');
-        // });
+        $router->get('/', 'ViewController@accounts');
+        $router->group(["middleware" => "authToken"], function () use ($router) {
+            $router->get('/get', 'UserController@get');
+        });
     });
 
     $router->group(["middleware" => "authToken"], function () use ($router) {
         $router->post('/current', 'UserController@current');
-        // $router->post('/create', 'UserController@create');
-        // $router->patch('/edit', 'UserController@edit');
+        $router->post('/create', 'UserController@create');
+        $router->patch('/edit', 'UserController@edit');
 
-        // $router->group(["middleware" => "authPassword"], function () use ($router) {
-        //     $router->delete('/delete', 'UserController@delete');
-        // });
+        $router->group(["middleware" => "authPassword"], function () use ($router) {
+            $router->delete('/delete', 'UserController@delete');
+        });
 
-        // $router->group(["prefix" => "self-edit"], function () use ($router) {
-        //     $router->patch('/', 'UserController@selfEdit');
-        //     $router->group(["middleware" => "authPassword"], function () use ($router) {
-        //         $router->patch('/change-password', 'UserController@changeSelfPassword');
-        //     });
-        // });
+        $router->group(["prefix" => "self-edit"], function () use ($router) {
+            $router->patch('/', 'UserController@selfEdit');
+            $router->group(["middleware" => "authPassword"], function () use ($router) {
+                $router->patch('/change-password', 'UserController@changeSelfPassword');
+            });
+        });
     });
 });

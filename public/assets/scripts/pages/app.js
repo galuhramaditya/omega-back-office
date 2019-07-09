@@ -1,15 +1,8 @@
 var app = new Vue({
     el: "#app",
     data: {
-        container: null,
-        extra_container: null,
         user: null,
-        menu: [
-            {
-                name: "Balance Sheet",
-                url: "/report/balance-sheet"
-            }
-        ],
+        menu: null,
         token: null
     },
     computed: {
@@ -27,7 +20,7 @@ var app = new Vue({
             app.token = localStorage.getItem("token");
         },
         refresh_user: function() {
-            // app.menu = null;
+            app.menu = null;
             $.ajax({
                 type: "post",
                 url: "/user/current",
@@ -37,9 +30,9 @@ var app = new Vue({
                 success: function(response) {
                     app.user = response.data;
 
-                    // if (response.data.role != null) {
-                    //     app.menu = response.data.role.pages;
-                    // }
+                    if (response.data.role != null) {
+                        app.menu = response.data.role.pages;
+                    }
 
                     $("[vue-data]").slideDown("slow");
                     $("#on-print").slideUp("slow");

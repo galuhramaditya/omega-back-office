@@ -19,7 +19,7 @@ var report = new Vue({
                 url: "/report/balance-sheet",
                 type: "POST",
                 data: {
-                    cocd: app.user.CoCd,
+                    cocd: app.user.cocd,
                     month: month,
                     year: year
                 },
@@ -35,6 +35,10 @@ var report = new Vue({
                     } else {
                         bootbox.alert(`data doesn't exist on ${date}`);
                     }
+                },
+                error: function() {
+                    console.log("as");
+                    report.refresh_report();
                 }
             });
         },
@@ -60,4 +64,11 @@ $(document).ready(function() {
             todayHighlight: true
         })
         .datepicker("setDate", moment().format("DD/MM/YYYY"));
+
+    start = setInterval(function() {
+        if (app.user != null) {
+            clearInterval(start);
+            report.refresh_report();
+        }
+    }, 0);
 });

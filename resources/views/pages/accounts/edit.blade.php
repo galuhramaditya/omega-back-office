@@ -7,13 +7,26 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
+                    <label>Cocd</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-cog"></i>
+                        </span>
+                        <select name="cocd" class="form-control">
+                            <option disabled selected hidden>Company Code</option>
+                            <option v-for="cocd in account.cocd" :value="cocd" :selected="cocd == users.cocd">@{{cocd}}</option>
+                        </select>
+                    </div>
+                    <div class="help-block font-red" help-name="cocd"></div>
+                </div>
+                <div class="form-group">
                     <label>Role</label>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="fa fa-cog"></i>
                         </span>
                         <select name="role" class="form-control">
-                            <option v-for="role in _.orderBy(extra_container, ['level', 'name'], 'asc')" :value="role.id" :selected="role.id == users.role.id">@{{ `${role.name} (${role.level})` }}</option>
+                            <option v-for="role in _.orderBy(account.roles, ['level', 'name'], 'asc')" :value="role.id" :selected="role.id == users.role.id">@{{ `${role.name} (${role.level})` }}</option>
                         </select>
                     </div>
                     <div class="help-block font-red" help-name="role"></div>
