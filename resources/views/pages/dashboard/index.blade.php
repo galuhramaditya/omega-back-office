@@ -4,7 +4,7 @@
     <style>
         #dashboard-stat a {
             margin-top: 10px;
-            width: 250px;
+            width: 100%;
         }
     </style>
 @endsection
@@ -21,7 +21,7 @@
     @include('pages.dashboard.info')
     
     <div class="row" v-if="menu != null" id="dashboard-stat">
-        <div class="col-sm-3 col-xs-6" v-for="menu in _.orderBy(menu, 'url', 'asc')">
+        <div class="col-lg-3 col-sm-4 col-xs-6" v-for="menu in _.orderBy(menu, 'url', 'asc')">
             <a class="btn default" :href="menu.url">
                 @{{menu.name}}
             </a>
