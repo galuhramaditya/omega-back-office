@@ -16,7 +16,7 @@
 
 @section('content')
 <!-- BEGIN CONTENT BODY -->
-<div id="user">
+<div id="roles">
     <!-- BEGIN PAGE TITLE-->
     <h1 class="page-title"> Role System
     </h1>
