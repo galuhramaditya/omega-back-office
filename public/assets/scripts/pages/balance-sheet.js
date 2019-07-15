@@ -1,7 +1,25 @@
 var report = new Vue({
     data: {
         total: null,
-        reports: null
+        reports: null,
+        chart: [
+            {
+                title: "Activa",
+                id: "assets",
+                field: {
+                    name: "ActNm",
+                    value: "ActTot"
+                }
+            },
+            {
+                title: "Pasiva",
+                id: "liabilities",
+                field: {
+                    name: "PasNm",
+                    value: "PasTot"
+                }
+            }
+        ]
     },
     methods: {
         refresh_report: function() {
@@ -31,6 +49,10 @@ var report = new Vue({
 
                         $("#on-print").slideDown("slow", function() {
                             scrollTo($("#on-print"));
+
+                            $.each(report.chart, function(i, point) {
+                                report.charting(point);
+                            });
                         });
                     } else {
                         bootbox.alert(`data doesn't exist on ${date}`);
@@ -42,13 +64,72 @@ var report = new Vue({
                 }
             });
         },
+        charting: function(data) {
+            var items = report.reports;
+            var obj = {};
+            var last = "";
+
+            $.each(items, function(i, point) {
+                if (
+                    point[data.field.name][0] != " " &&
+                    point[data.field.name] != ""
+                ) {
+                    last = point[data.field.name];
+                    obj[last] = {
+                        name: last,
+                        y: 0
+                    };
+                }
+                if (point[data.field.value] != 0) {
+                    obj[last]["y"] = parseFloat(point[data.field.value]);
+                }
+            });
+
+            var series = [];
+            $.each(obj, function(i, point) {
+                series.push(point);
+            });
+
+            Highcharts.chart(data.id, {
+                chart: {
+                    type: "pie"
+                },
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: $("input[name=date]")
+                        .data("datepicker")
+                        .getFormattedDate("MM yyyy")
+                },
+                tooltip: {
+                    pointFormat: "<b>{point.y}</b> ({point.percentage:.2f}%)"
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: "pointer",
+                        dataLabels: {
+                            enabled: true,
+                            format:
+                                "<b>{point.name}</b>: {point.percentage:.2f}%"
+                        }
+                    }
+                },
+                series: [
+                    {
+                        colorByPoint: true,
+                        data: series
+                    }
+                ]
+            });
+        },
         print: function() {
-            var company = $("select[name=company] option:selected").val();
             var date = $("input[name=date]")
                 .data("datepicker")
-                .getFormattedDate("dd/mm/yyyy");
+                .getFormattedDate("mm/yyyy");
 
-            app.print(`${company} (${date})`);
+            app.print(date);
         }
     }
 });

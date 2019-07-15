@@ -24,6 +24,7 @@
         @include("includes.loader")
         <!-- END LOADER -->
         <div id="on-print">
+            @include("pages.balance-sheet.chart")
             @include("pages.balance-sheet.table")
         </div>
     </div>

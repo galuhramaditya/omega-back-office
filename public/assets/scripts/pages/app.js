@@ -68,4 +68,10 @@ var app = new Vue({
 
 $(document).ready(function() {
     app.refresh_token();
+
+    Highcharts.setOptions({
+        lang: {
+            numericSymbols: ["rb", "jt", "m", "t"]
+        }
+    });
 });

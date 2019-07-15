@@ -1,10 +1,20 @@
-<div class="row">
+<div class="row" vue-data>
     <div class="col-md-12">
-        <div class="portlet light bordered" vue-data>
+        <div class="portlet light bordered">
             <div class="portlet-title">
                 <div class="caption">
                     <i class="fa fa-user font-green"></i>
                     <span class="caption-subject font-green bold uppercase">User Info</span>
+                </div>
+                <div class="actions">
+                    <div class="btn-group">
+                        <a class="btn yellow btn-outline btn-circle btn-sm" data-toggle="modal" href="#self-edit">Edit</a>
+                        @include("pages.dashboard.self-edit")
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn purple btn-outline btn-circle btn-sm" data-toggle="modal" href="#change-self-password">Change Password</a>
+                        @include("pages.dashboard.change-self-password")
+                    </div>
                 </div>
             </div>
             <div class="portlet-body" v-if="user != null">
