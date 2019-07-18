@@ -24,11 +24,11 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody v-if="user != null" class="text-left">
+                    <tbody v-if="user != null" class="text-center">
                         <tr v-for="roles in _.orderBy(role.roles,['level', 'name'], 'asc')">
                             <td>@{{roles.name}}</td>
-                            <td class="text-right">@{{roles.level}}</td>
-                            <td><div v-for="page in roles.pages">@{{page.name}}</div></td>
+                            <td>@{{roles.level}}</td>
+                            <td class="text-left"><div v-for="page in _.orderBy(role.pages, 'url', 'asc')">@{{page.name}}</div></td>
                             <td width="100">
                                 <div class="action" >
                                     <a class="btn yellow btn-icon-only" data-toggle="modal" :href=`#edit-${roles.id}`>

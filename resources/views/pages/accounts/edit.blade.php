@@ -14,7 +14,7 @@
                         </span>
                         <select name="cocd" class="form-control">
                             <option disabled selected hidden>Company Code</option>
-                            <option v-for="cocd in account.cocd" :value="cocd" :selected="cocd == users.cocd">@{{cocd}}</option>
+                            <option v-for="comp in account.company" :value="comp.CoCd" :selected="comp.CoCd == users.cocd">@{{comp.CoCd}}</option>
                         </select>
                     </div>
                     <div class="help-block font-red" help-name="cocd"></div>

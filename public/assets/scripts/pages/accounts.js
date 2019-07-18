@@ -1,16 +1,16 @@
 var account = new Vue({
     data: {
-        cocd: null,
+        company: null,
         users: null,
         roles: null
     },
     methods: {
-        refresh_cocd: function() {
+        refresh_company: function() {
             $.ajax({
                 type: "get",
                 url: "/company/get",
                 success: function(response) {
-                    account.cocd = response.data;
+                    account.company = response.data;
                 }
             });
         },
@@ -144,6 +144,6 @@ var account = new Vue({
 });
 
 $(document).ready(function() {
-    account.refresh_cocd();
+    account.refresh_company();
     account.refresh_users();
 });

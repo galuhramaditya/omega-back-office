@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserService;
-use App\Services\CompanyService;
 use App\Libraries\Token;
 use App\Libraries\Response;
 use App\Libraries\Validation;
@@ -12,13 +11,11 @@ use App\Libraries\Validation;
 class UserController extends Controller
 {
     protected $userService;
-    protected $companyService;
     protected $validation;
 
-    public function __construct(UserService $userService, CompanyService $companyService)
+    public function __construct(UserService $userService)
     {
         $this->userService = $userService;
-        $this->companyService = $companyService;
         $this->validation = Validation::rulesOfFunction([
             "login" => [
                 "cocd"      => "required",
@@ -54,9 +51,6 @@ class UserController extends Controller
         $user = $this->userService->findOneBy($request->all());
 
         if ($user) {
-            $user->conm = $user->company->CompAlias;
-            unset($user->company);
-
             $token = Token::encode($user);
             return Response::success("login succesfully", ["token" => $token]);
             // return Response::success("login succesfully", $user);
