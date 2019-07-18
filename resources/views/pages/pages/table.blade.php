@@ -23,7 +23,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-left">
                         <tr v-for="pages in _.orderBy(page.pages, 'name', 'asc')">
                             <td>@{{pages.name}}</td>
                             <td>@{{pages.url}}</td>

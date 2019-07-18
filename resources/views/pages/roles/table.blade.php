@@ -24,10 +24,10 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody v-if="user != null">
+                    <tbody v-if="user != null" class="text-left">
                         <tr v-for="roles in _.orderBy(role.roles,['level', 'name'], 'asc')">
                             <td>@{{roles.name}}</td>
-                            <td>@{{roles.level}}</td>
+                            <td class="text-right">@{{roles.level}}</td>
                             <td><div v-for="page in roles.pages">@{{page.name}}</div></td>
                             <td width="100">
                                 <div class="action" >

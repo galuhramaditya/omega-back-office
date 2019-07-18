@@ -129,7 +129,7 @@ var report = new Vue({
                 .data("datepicker")
                 .getFormattedDate("mm/yyyy");
 
-            app.print(date);
+            app.print(`${app.user.conm} | ${date}`);
         }
     }
 });

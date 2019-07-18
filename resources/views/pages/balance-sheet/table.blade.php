@@ -10,14 +10,14 @@
             </div>
             <div class="portlet-body table-scrollable">
                 <table class="table table-striped table-bordered table-hover order-column">
-                    <tbody>
+                    <tbody class="text-right">
                         <tr v-for="(data, index) in report.reports">
-                            <td style="text-align: left;" :class="data.ActNm[0] != ' ' ? 'bold' : ''">@{{data.ActNm.split(" ").join("&nbsp")}}</td>
-                            <td style="text-align: right;">@{{data.ActAmt == 0 ? "" : parseFloat(data.ActAmt).toLocaleString(undefined, { maximumFractionDigits: 2 })}}</td>
-                            <td style="text-align: right;" :style="data.ActTot == 0 ? '' : 'border-top: 2px solid black'">@{{data.ActTot == 0 ? "" : parseFloat(data.ActTot).toLocaleString(undefined, { maximumFractionDigits: 2 })}}</td>
-                            <td style="text-align: left;" :class="data.PasNm[0] != ' ' ? 'bold' : ''">@{{data.PasNm.split(" ").join("&nbsp")}}</td>
-                            <td style="text-align: right;">@{{data.PasAmt == 0 ? "" : parseFloat(data.PasAmt).toLocaleString(undefined, { maximumFractionDigits: 2 })}}</td>
-                            <td style="text-align: right;" :style="data.PasTot == 0 ? '' : 'border-top: 2px solid black'">@{{data.PasTot == 0 ? "" : parseFloat(data.PasTot).toLocaleString(undefined, { maximumFractionDigits: 2 })}}</td>
+                            <td class="text-left" :class="data.ActNm[0] != ' ' ? 'bold' : ''">@{{data.ActNm.split(" ").join("&nbsp")}}</td>
+                            <td>@{{data.ActAmt == 0 ? "" : parseFloat(data.ActAmt).toLocaleString(undefined, { maximumFractionDigits: 2 })}}</td>
+                            <td :style="data.ActTot == 0 ? '' : 'border-top: 2px solid black'">@{{data.ActTot == 0 ? "" : parseFloat(data.ActTot).toLocaleString(undefined, { maximumFractionDigits: 2 })}}</td>
+                            <td class="text-left" :class="data.PasNm[0] != ' ' ? 'bold' : ''">@{{data.PasNm.split(" ").join("&nbsp")}}</td>
+                            <td>@{{data.PasAmt == 0 ? "" : parseFloat(data.PasAmt).toLocaleString(undefined, { maximumFractionDigits: 2 })}}</td>
+                            <td :style="data.PasTot == 0 ? '' : 'border-top: 2px solid black'">@{{data.PasTot == 0 ? "" : parseFloat(data.PasTot).toLocaleString(undefined, { maximumFractionDigits: 2 })}}</td>
                         </tr>
                     </tbody>
                 </table>

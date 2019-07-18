@@ -25,12 +25,12 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody v-if="user != null">
+                    <tbody v-if="user != null" class="text-left">
                         <tr v-for="users in _.orderBy(account.users,['role.level', 'username'],'asc')" v-show="users.id != user.id">
-                            <td>@{{users.cocd}}</td>
+                            <td class="text-right">@{{users.cocd}}</td>
                             <td>@{{users.username}}</td>
                             <td>@{{users.role.name}}</td>
-                            <td>@{{users.role.level}}</td>
+                            <td class="text-right">@{{users.role.level}}</td>
                             <td width="100">
                                 <div class="action">
                                     <a class="btn yellow btn-icon-only" data-toggle="modal" :href=`#edit-${users.id}`>
