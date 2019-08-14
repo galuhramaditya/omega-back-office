@@ -31,7 +31,7 @@ var app = new Vue({
                 },
                 success: function(response) {
                     showAlert("success", response.message);
-                    localStorage.setItem("token", response.data.token);
+                    sessionStorage.setItem("token", response.data.token);
                     window.location = "/";
                 },
                 error: function(response) {
@@ -44,7 +44,7 @@ var app = new Vue({
 });
 
 jQuery(document).ready(function() {
-    if (localStorage.hasOwnProperty("token")) {
+    if (sessionStorage.hasOwnProperty("token")) {
         window.location = "/";
     }
     app.refresh_company();
