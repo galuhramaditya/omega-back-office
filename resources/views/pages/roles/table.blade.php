@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-12" vue-data> 
+    <div class="col-md-12" vue-data>
         <!-- BEGIN EXAMPLE TABLE PORTLET-->
         <div class="portlet light bordered" id="table" v-if="window.hasOwnProperty('role')">
             <div class="portlet-title">
@@ -28,9 +28,11 @@
                         <tr v-for="roles in _.orderBy(role.roles,['level', 'name'], 'asc')">
                             <td>@{{roles.name}}</td>
                             <td>@{{roles.level}}</td>
-                            <td class="text-left"><div v-for="page in _.orderBy(role.pages, 'url', 'asc')">@{{page.name}}</div></td>
+                            <td class="text-left">
+                                <div v-for="page in _.orderBy(roles.pages, 'url', 'asc')">@{{page.name}}</div>
+                            </td>
                             <td width="100">
-                                <div class="action" >
+                                <div class="action">
                                     <a class="btn yellow btn-icon-only" data-toggle="modal" :href=`#edit-${roles.id}`>
                                         <i class="fa fa-edit"></i>
                                     </a>

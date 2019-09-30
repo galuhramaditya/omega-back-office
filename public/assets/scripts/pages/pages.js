@@ -18,7 +18,7 @@ var page = new Vue({
         handle_create: function() {
             var form = $("[form-action=create]");
             var name = form.find("input[name=name]").val();
-            var url = form.find("input[name=url]").val();
+            var link = form.find("input[name=url]").val();
 
             hideFormAlert();
 
@@ -28,7 +28,7 @@ var page = new Vue({
                 data: {
                     token: app.token,
                     name: name,
-                    url: url
+                    url: link
                 },
                 success: function(response) {
                     showAlert("success", response.message);
@@ -49,7 +49,7 @@ var page = new Vue({
                 if (result) {
                     var form = $(`[form-action=edit-${id}]`);
                     var name = form.find("input[name=name]").val();
-                    var url = form.find("input[name=url]").val();
+                    var link = form.find("input[name=url]").val();
 
                     hideFormAlert();
 
@@ -60,7 +60,7 @@ var page = new Vue({
                             token: app.token,
                             id: id,
                             name: name,
-                            url: url
+                            url: link
                         },
                         success: function(response) {
                             showAlert("success", response.message);
