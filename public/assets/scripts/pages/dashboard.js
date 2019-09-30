@@ -34,7 +34,7 @@ var dashboard = new Vue({
             loading_down(func);
 
             $.ajax({
-                url: "/report/balance-sheet",
+                url: url("/report/balance-sheet"),
                 type: "POST",
                 data: {
                     cocd: app.user.cocd,
@@ -86,7 +86,7 @@ var dashboard = new Vue({
             loading_down(func);
 
             $.ajax({
-                url: "/report/balance-sheet",
+                url: url("/report/balance-sheet"),
                 type: "POST",
                 data: {
                     cocd: app.user.cocd,

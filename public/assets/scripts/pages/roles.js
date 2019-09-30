@@ -7,7 +7,7 @@ var role = new Vue({
         refresh_roles: function() {
             $.ajax({
                 type: "get",
-                url: "/role/get",
+                url: url("/role/get"),
                 data: {
                     token: app.token
                 },
@@ -23,7 +23,7 @@ var role = new Vue({
         refresh_pages: function() {
             $.ajax({
                 type: "get",
-                url: "/page/get",
+                url: url("/page/get"),
                 data: {
                     token: app.token
                 },
@@ -48,7 +48,7 @@ var role = new Vue({
 
             $.ajax({
                 type: "post",
-                url: "/role/create",
+                url: url("/role/create"),
                 data: {
                     token: app.token,
                     name: name,
@@ -82,7 +82,7 @@ var role = new Vue({
 
                     $.ajax({
                         type: "patch",
-                        url: "/role/edit",
+                        url: url("/role/edit"),
                         data: {
                             token: app.token,
                             id: id,
@@ -118,7 +118,7 @@ var role = new Vue({
 
                     $.ajax({
                         type: "delete",
-                        url: "/role/delete",
+                        url: url("/role/delete"),
                         data: {
                             token: app.token,
                             password: password,

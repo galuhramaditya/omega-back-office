@@ -8,7 +8,7 @@ var account = new Vue({
         refresh_company: function() {
             $.ajax({
                 type: "get",
-                url: "/company/get",
+                url: url("/company/get"),
                 success: function(response) {
                     account.company = response.data;
                 }
@@ -17,7 +17,7 @@ var account = new Vue({
         refresh_users: function() {
             $.ajax({
                 type: "get",
-                url: "/user/accounts/get",
+                url: url("/user/accounts/get"),
                 data: {
                     token: app.token
                 },
@@ -30,7 +30,7 @@ var account = new Vue({
         refresh_roles: function() {
             $.ajax({
                 type: "get",
-                url: "/role/get",
+                url: url("/role/get"),
                 data: {
                     token: app.token
                 },
@@ -53,7 +53,7 @@ var account = new Vue({
 
             $.ajax({
                 type: "post",
-                url: "/user/create",
+                url: url("/user/create"),
                 data: {
                     token: app.token,
                     cocd: cocd,
@@ -87,7 +87,7 @@ var account = new Vue({
 
                     $.ajax({
                         type: "patch",
-                        url: "/user/edit",
+                        url: url("/user/edit"),
                         data: {
                             token: app.token,
                             cocd: cocd,
@@ -120,7 +120,7 @@ var account = new Vue({
 
                         $.ajax({
                             type: "delete",
-                            url: "/user/delete",
+                            url: url("/user/delete"),
                             data: {
                                 token: app.token,
                                 password: password,

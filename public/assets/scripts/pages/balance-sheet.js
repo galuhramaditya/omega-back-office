@@ -34,7 +34,7 @@ var report = new Vue({
                 .getFormattedDate("yyyy");
 
             $.ajax({
-                url: "/report/balance-sheet",
+                url: url("/report/balance-sheet"),
                 type: "POST",
                 data: {
                     cocd: app.user.cocd,

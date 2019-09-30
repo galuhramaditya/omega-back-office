@@ -6,7 +6,7 @@ var page = new Vue({
         refresh_pages: function() {
             $.ajax({
                 type: "get",
-                url: "/page/get",
+                url: url("/page/get"),
                 data: {
                     token: app.token
                 },
@@ -24,7 +24,7 @@ var page = new Vue({
 
             $.ajax({
                 type: "post",
-                url: "/page/create",
+                url: url("/page/create"),
                 data: {
                     token: app.token,
                     name: name,
@@ -55,7 +55,7 @@ var page = new Vue({
 
                     $.ajax({
                         type: "patch",
-                        url: "/page/edit",
+                        url: url("/page/edit"),
                         data: {
                             token: app.token,
                             id: id,
@@ -90,7 +90,7 @@ var page = new Vue({
 
                     $.ajax({
                         type: "delete",
-                        url: "/page/delete",
+                        url: url("/page/delete"),
                         data: {
                             token: app.token,
                             password: password,

@@ -3,7 +3,7 @@
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a class="logo-default" style="color: white" href="/">{{env("APP_NAME")}}</a>
+            <a class="logo-default" style="color: white" :href="url('/')">{{env("APP_NAME")}}</a>
             <div class="menu-toggler sidebar-toggler">
                 <span></span>
             </div>
@@ -22,13 +22,13 @@
                         <span class="username">@{{user.conm}}</span>
                     </a>
                 </li>
-                
+
                 <li class="dropdown dropdown-user" style="pointer-events: none">
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="username">|</span>
                     </a>
                 </li>
-                
+
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-user" vue-data>
@@ -38,7 +38,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
-                            <a href="/user/profile">
+                            <a :href="url('/user/profile')">
                                 <i class="fa fa-cog"></i> Profile </a>
                         </li>
                         <li>
