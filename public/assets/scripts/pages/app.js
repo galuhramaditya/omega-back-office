@@ -16,7 +16,7 @@ var app = new Vue({
         }
     },
     methods: {
-        async refresh_token() {
+        refresh_token() {
             app.token = sessionStorage.getItem("token");
         },
         refresh_user: function() {
