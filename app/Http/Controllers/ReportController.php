@@ -21,4 +21,16 @@ class ReportController extends Controller
         $get = $this->reportService->balanceSheet($request->cocd, $request->year, $request->month, "", "", "T");
         return Response::success("succeffully get report data", $get);
     }
+
+    public function profitLossMTD(Request $request)
+    {
+        $get = $this->reportService->profitLossMTD($request->cocd, $request->year, $request->month, "", "zzzzz");
+        return Response::success("succeffully get report data", $get);
+    }
+
+    public function profitLossYTD(Request $request)
+    {
+        $get = $this->reportService->profitLossYTD($request->cocd, $request->year, $request->month, "", "zzzzz");
+        return Response::success("succeffully get report data", $get);
+    }
 }

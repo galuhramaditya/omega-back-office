@@ -54,6 +54,11 @@ $router->group(["prefix" => "report"], function () use ($router) {
         $router->get('/', 'ViewController@balanceSheet');
         $router->post('/', 'ReportController@balanceSheet');
     });
+    $router->group(["prefix" => "profit-loss"], function () use ($router) {
+        $router->get('/', 'ViewController@profitLoss');
+        $router->post('/MTD', 'ReportController@profitLossMTD');
+        $router->post('/YTD', 'ReportController@profitLossYTD');
+    });
 });
 
 // user

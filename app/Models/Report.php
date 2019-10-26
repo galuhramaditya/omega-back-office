@@ -12,4 +12,18 @@ class Report
 
         return $results;
     }
+
+    public static function profitLossMTD(string $cocd, string $cyear, string $cmonth, string $fDepCd, string $tDepCd)
+    {
+        $results = DB::select('SET NOCOUNT ON; EXEC dbo.GlrPLM ?,?,?,?,?', [$cocd, $cyear, $cmonth, $fDepCd, $tDepCd]);
+
+        return $results;
+    }
+
+    public static function profitLossYTD(string $cocd, string $cyear, string $cmonth, string $fDepCd, string $tDepCd)
+    {
+        $results = DB::select('SET NOCOUNT ON; EXEC dbo.GlrPLY ?,?,?,?,?', [$cocd, $cyear, $cmonth, $fDepCd, $tDepCd]);
+
+        return $results;
+    }
 }
