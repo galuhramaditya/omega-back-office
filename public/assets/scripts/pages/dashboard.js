@@ -5,7 +5,8 @@ var dashboard = new Vue({
             display: [],
             list: {
                 "balance-sheet": {},
-                "balance-sheet-act": {
+                "profit-loss": {},
+                "balance-sheet-first": {
                     title: "Activa",
                     field: {
                         name: "ActNm",
@@ -14,11 +15,29 @@ var dashboard = new Vue({
                     date: moment(),
                     date_format: "MMMM YYYY"
                 },
-                "balance-sheet-pas": {
+                "balance-sheet-second": {
                     title: "Pasiva",
                     field: {
                         name: "PasNm",
                         value: "PasTot"
+                    },
+                    date: moment(),
+                    date_format: "MMMM YYYY"
+                },
+                "profit-loss-first": {
+                    title: "Profit - Month to Date",
+                    field: {
+                        name: "name",
+                        value: "data"
+                    },
+                    date: moment(),
+                    date_format: "MMMM YYYY"
+                },
+                "profit-loss-second": {
+                    title: "Loss - Month to Date",
+                    field: {
+                        name: "name",
+                        value: "data"
                     },
                     date: moment(),
                     date_format: "MMMM YYYY"
@@ -27,7 +46,89 @@ var dashboard = new Vue({
         }
     },
     methods: {
-        "balance-sheet-act": function() {
+        "profit-loss-first": function() {
+            var func = arguments.callee.name;
+            var data = dashboard.chart.list[func];
+
+            loading_down(func);
+
+            $.ajax({
+                url: url("/report/profit-loss/MTD"),
+                type: "POST",
+                data: {
+                    cocd: app.user.cocd,
+                    month: data.date.format("MM"),
+                    year: data.date.format("YYYY")
+                },
+                success: function(response) {
+                    loading_up(func);
+
+                    var series = [];
+                    response.data.map(key => {
+                        var name = key.ActNm.split("Total ").join("");
+
+                        if (
+                            key.ActNm == "Total REVENUE/SALES" ||
+                            key.ActNm == "Total COST OF SALES"
+                        ) {
+                            series.push({
+                                name,
+                                y: parseFloat(key.ActTot)
+                            });
+                        }
+                    });
+
+                    pie_chart({
+                        data: series,
+                        id: func,
+                        title: data.title,
+                        subtitle: subtitle(data)
+                    });
+                }
+            });
+        },
+        "profit-loss-second": function() {
+            var func = arguments.callee.name;
+            var data = dashboard.chart.list[func];
+
+            loading_down(func);
+
+            $.ajax({
+                url: url("/report/profit-loss/MTD"),
+                type: "POST",
+                data: {
+                    cocd: app.user.cocd,
+                    month: data.date.format("MM"),
+                    year: data.date.format("YYYY")
+                },
+                success: function(response) {
+                    loading_up(func);
+
+                    var series = [];
+                    response.data.map(key => {
+                        var name = key.ActNm.split("Total ").join("");
+
+                        if (
+                            key.ActNm == "Total EXPENSES" ||
+                            key.ActNm == "Total OTHER INCOME/EXPENSES"
+                        ) {
+                            series.push({
+                                name,
+                                y: parseFloat(key.ActTot)
+                            });
+                        }
+                    });
+
+                    pie_chart({
+                        data: series,
+                        id: func,
+                        title: data.title,
+                        subtitle: subtitle(data)
+                    });
+                }
+            });
+        },
+        "balance-sheet-first": function() {
             var func = arguments.callee.name;
             var data = dashboard.chart.list[func];
 
@@ -79,7 +180,7 @@ var dashboard = new Vue({
                 }
             });
         },
-        "balance-sheet-pas": function() {
+        "balance-sheet-second": function() {
             var func = arguments.callee.name;
             var data = dashboard.chart.list[func];
 
@@ -143,19 +244,19 @@ $(document).ready(function() {
                 path = value.url.split("/");
                 item = path[path.length - 1];
                 if (dashboard.chart.list.hasOwnProperty(item)) {
-                    if (item == "balance-sheet") {
+                    if (item == "balance-sheet" || item == "profit-loss") {
                         dashboard.chart.display.push({
                             title: value.name,
                             link: value.url,
-                            id: `${item}-act`
+                            id: `${item}-first`
                         });
                         dashboard.chart.display.push({
                             title: value.name,
                             link: value.url,
-                            id: `${item}-pas`
+                            id: `${item}-second`
                         });
-                        dashboard[`${item}-act`]();
-                        dashboard[`${item}-pas`]();
+                        dashboard[`${item}-first`]();
+                        dashboard[`${item}-second`]();
                     } else {
                         dashboard.chart.display.push({
                             title: value.name,

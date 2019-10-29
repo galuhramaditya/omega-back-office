@@ -2,6 +2,25 @@ var report = new Vue({
     data: {
         total: null,
         reports: null,
+        summary: null,
+        chart: [
+            {
+                title: "Profit",
+                id: "profit",
+                field: {
+                    name: "name",
+                    value: "data"
+                }
+            },
+            {
+                title: "Loss",
+                id: "loss",
+                field: {
+                    name: "name",
+                    value: "data"
+                }
+            }
+        ],
         type: "MTD"
     },
     methods: {
@@ -29,6 +48,36 @@ var report = new Vue({
 
                     if (response.hasOwnProperty("data")) {
                         report.reports = response.data;
+                        report.summary = {
+                            profit: [],
+                            loss: []
+                        };
+
+                        report.reports.map(key => {
+                            var name = key.ActNm.split("Total ").join("");
+
+                            if (
+                                key.ActNm == "Total REVENUE/SALES" ||
+                                key.ActNm == "Total COST OF SALES"
+                            ) {
+                                report.summary.profit.push({
+                                    name,
+                                    data: key.ActTot
+                                });
+                            } else if (
+                                key.ActNm == "Total EXPENSES" ||
+                                key.ActNm == "Total OTHER INCOME/EXPENSES"
+                            ) {
+                                report.summary.loss.push({
+                                    name,
+                                    data: key.ActTot
+                                });
+                            }
+                        });
+
+                        report.chart.map(data => {
+                            report.charting(data);
+                        });
 
                         $("#on-print").slideDown("slow", function() {
                             scrollTo($("#on-print"));
@@ -38,9 +87,49 @@ var report = new Vue({
                     }
                 },
                 error: function() {
-                    console.log("as");
                     report.refresh_report();
                 }
+            });
+        },
+        charting: function(data) {
+            var series = report.summary[data.id].map(key => {
+                key.name = key[data.field.name];
+                key.y = parseFloat(key[data.field.value]);
+                return key;
+            });
+
+            Highcharts.chart(data.id, {
+                chart: {
+                    type: "pie"
+                },
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: $("input[name=date]")
+                        .data("datepicker")
+                        .getFormattedDate("MM yyyy")
+                },
+                tooltip: {
+                    pointFormat: "<b>{point.y}</b> ({point.percentage:.2f}%)"
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: "pointer",
+                        dataLabels: {
+                            enabled: true,
+                            format:
+                                "<b>{point.name}</b>: {point.percentage:.2f}%"
+                        }
+                    }
+                },
+                series: [
+                    {
+                        colorByPoint: true,
+                        data: series
+                    }
+                ]
             });
         },
         print: function() {

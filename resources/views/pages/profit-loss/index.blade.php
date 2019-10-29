@@ -24,6 +24,7 @@
     @include("includes.loader")
     <!-- END LOADER -->
     <div id="on-print">
+        @include("pages.profit-loss.chart")
         @include("pages.profit-loss.table")
     </div>
 </div>
