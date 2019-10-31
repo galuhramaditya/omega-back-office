@@ -1,6 +1,5 @@
 var report = new Vue({
     data: {
-        total: null,
         reports: null,
         chart: [
             {
@@ -53,6 +52,34 @@ var report = new Vue({
                             $.each(report.chart, function(i, point) {
                                 report.charting(point);
                             });
+
+                            var total = {
+                                act: 0,
+                                pas: 0
+                            };
+                            response.data.map(key => {
+                                total.act += parseFloat(key.ActTot);
+                                total.pas += parseFloat(key.PasTot);
+                            });
+
+                            report.reports.push(
+                                {
+                                    ActNm: " ",
+                                    ActAmt: 0,
+                                    ActTot: 0,
+                                    PasNm: " ",
+                                    PasAmt: 0,
+                                    PasTot: 0
+                                },
+                                {
+                                    ActNm: "TOTAL CURRENT ASSETS",
+                                    ActAmt: 0,
+                                    ActTot: total.act,
+                                    PasNm: "TOTAL CURRENT LIABILITIES",
+                                    PasAmt: 0,
+                                    PasTot: total.pas
+                                }
+                            );
                         });
                     } else {
                         bootbox.alert(`data doesn't exist on ${date}`);
